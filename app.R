@@ -25,7 +25,7 @@ all_genres <- all_genres[!is.na(all_genres)]
 # All-purpose function for filtering data
 # --------------------------------------------------------------------
 
-#' Format a set of numbers to have a certain number of sig figs
+#' Get films based on filters
 #' 
 #' @param b_tab data.frame or tibble. table from the "title.basics.tsv.gz" file on IMDB.
 #' @param r_tab data.frame or tibble. table from the "title.ratings.tsv.gz" file on IMDB.
@@ -60,11 +60,18 @@ get_best_films <- function(b_tab, r_tab, movie_only, genre, rating_min = 0.4, vo
 
 	if (!any(omit_genre == "none")) {
 		b_filt <- b_filt %>%
-			dplyr::filter(!grepl(paste(omit_genre, collapse = "|"), genres))
+			dplyr::filter(!grepl(paste(omit_genre, collapse = "|"), Genres))
 	}
 
 	return(b_filt)
 }
+
+# b_tab = basics
+# r_tab = ratings
+# movie_only = TRUE
+# genre = c("Horror", "Mystery")
+# omit_genre = c("Comedy", "Music")
+#
 
 # get_best_films(basics, ratings, TRUE, c("Horror", "Mystery"), omit_genre = c("Comedy", "Music"))
 
